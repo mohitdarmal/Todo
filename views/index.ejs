@@ -1,15 +1,33 @@
 <% include partials/header %>
 
 <div class='container'>
-<form action="/todos" method="POST">
+  <form action="/todos" method="POST">
     <div class="form-group">
-        <label for="exampleInputEmail1">Enter Your Todo</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" name='title'>
-      </div>
-      <div class="form-group">
+      <label for="exampleInputEmail1">Enter Your Todo</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name"
+        name='title'>
+    </div>
+    <div class="form-group">
       <button type="submit" class="btn btn-primary"> Save Todo </button>
-      </div>
-</form>
+    </div>
+  </form>
 </div>
 
 
+<div class='container'>
+  <div class='row'>
+    <% todos.forEach((todo) => { %>
+    <div class='col-md-6 mb-2'>
+      <%= todo.title %>
+    </div>
+    <div class='col-md-2 mb-2'>
+      <button class='btn btn-outline-primary'>Edit</button>
+    </div>
+    <div class='col-md-2 mb-2'>
+      <form action="/todos/ <%= todos._id %>?_method=DELETE" method="POST">
+        <button class='btn btn-outline-danger'>Delete</button>
+      </form>
+    </div>
+    <% }) %>
+  </div>
+</div>

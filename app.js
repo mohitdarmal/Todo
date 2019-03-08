@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 //App Config
 app.set('view engine', 'ejs');
@@ -8,6 +9,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(methodOverride('_method'));
 // parse application/json
 app.use(bodyParser.json())
 
@@ -29,29 +31,34 @@ app.get('/', (req, res) => {
 });
 
 app.get('/todos', (req, res) => {
-    /* Todo.find({}, (err, result) => {
+    Todo.find({}, (err, result) => {
         if(err){
-           return console.log(err);
+            console.log(err);
+        }else{
+            res.render('index', {todos : result});
         }
-        res.render('index', {todo : result});
-    }) */
-    res.render('index');
+    })
+    // res.render('index');
 });
 
 app.post('/todos', (req, res) => {
     console.log(typeof(req.body.title));
     var newTodo = new Todo({
         title :  req.body.title,
-    })
-    newTodo.save().then((result) => {
-        if(!result){
-            return console.log('Err');
-        }
+    });
+    if(!newTodo.title == ""){
+        newTodo.save().then((result) => {
+            if(!result){
+                return console.log('Err');
+            }
+            res.redirect('/todos');
+        });
+    }else{
         res.redirect('/todos');
-    })
-  
-
+    }
 });
+
+// app.delete('/todos')
 
 
 app.listen(3000, () => {
