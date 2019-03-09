@@ -20,7 +20,10 @@ mongoose.connect('mongodb://localhost:27017/User-Todo', {
     useNewUrlParser: true
 });
 var userTodoSchema = new mongoose.Schema({
-    title : String,
+    title: String,
+    time : String,
+    am : String,
+    // time : {type : Date, default : Date.now()}
 });
 var Todo = mongoose.model('Todo', userTodoSchema);
 
@@ -32,33 +35,78 @@ app.get('/', (req, res) => {
 
 app.get('/todos', (req, res) => {
     Todo.find({}, (err, result) => {
-        if(err){
+        if (err) {
             console.log(err);
-        }else{
-            res.render('index', {todos : result});
+        } else {
+            res.render('index', {
+                todos: result
+            });
         }
     })
     // res.render('index');
 });
 
 app.post('/todos', (req, res) => {
-    console.log(typeof(req.body.title));
+   /*  console.log(req.body.title);
+    console.log(req.body.time)
+    console.log(req.body.am) */
     var newTodo = new Todo({
-        title :  req.body.title,
+        title: req.body.title,
+        time : req.body.time,
+        am : req.body.am
     });
-    if(!newTodo.title == ""){
+
+    
+
+        if(newTodo.am == "am" || newTodo.am == "pm"){
         newTodo.save().then((result) => {
-            if(!result){
+            if (!result) {
                 return console.log('Err');
             }
             res.redirect('/todos');
         });
-    }else{
-        res.redirect('/todos');
     }
+    else {
+        res.redirect('/todos');        
+    }
+   
+  
 });
 
-// app.delete('/todos')
+app.get('/todos/:id/new', (req, res) => {
+    var id = req.params.id;
+    Todo.findById(id, (err, result) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.render('new', {todo : result});
+        }
+    })
+    
+});
+
+app.put('/todos/:id', (req, res) => {
+    console.log(req.params.id)
+    console.log(req.body.title)
+    Todo.findByIdAndUpdate(req.params.id, { $set : {
+        title : req.body.title,
+        time : req.body.time,
+        am : req.body.am
+    }}, {new : true}, (err, result) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/todos');
+        }
+    })
+})
+
+app.delete('/todos/:id', (req, res) => {
+    var id = req.params.id;
+    Todo.findByIdAndDelete(id).then((result) => {
+        res.redirect('/todos');
+    });
+});
 
 
 app.listen(3000, () => {

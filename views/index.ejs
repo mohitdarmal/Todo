@@ -1,11 +1,20 @@
 <% include partials/header %>
 
+
 <div class='container'>
   <form action="/todos" method="POST">
     <div class="form-group">
       <label for="exampleInputEmail1">Enter Your Todo</label>
       <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name"
-        name='title'>
+        autofocus name='title' required>
+      <div class='row'>
+        <div class='col-md-6'>
+          <input type="time" class="form-control" id="appt" name="time" required>
+        </div>
+        <div class='col-md-6'>
+          <input type="text" name='am' placeholder='AM/PM' required>
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-primary"> Save Todo </button>
@@ -15,19 +24,33 @@
 
 
 <div class='container'>
+
+  <% todos.forEach((todo) => { %>
   <div class='row'>
-    <% todos.forEach((todo) => { %>
-    <div class='col-md-6 mb-2'>
-      <%= todo.title %>
+    <div class='col-md-6 mb-2 todo-title'>
+      <div class='row'>
+        <div class=' col-md-7'>
+          <%= todo.title %>
+        </div>
+        <div class='col-md-4'>
+          (<span class='time-alert'><%= todo.time  %>
+            <%= todo.am.toUpperCase() %></span>)
+        </div>
+      </div>
+      <!-- <%= todo._id %> -->
     </div>
     <div class='col-md-2 mb-2'>
-      <button class='btn btn-outline-primary'>Edit</button>
+      <a href="/todos/<%= todo._id %>/new" class='btn btn-outline-primary'> Edit </a>
     </div>
     <div class='col-md-2 mb-2'>
-      <form action="/todos/ <%= todos._id %>?_method=DELETE" method="POST">
+      <form action="/todos/<%= todo._id %>?_method=DELETE" method="POST">
         <button class='btn btn-outline-danger'>Delete</button>
       </form>
     </div>
-    <% }) %>
   </div>
+  <% }) %>
+
 </div>
+
+
+<% include partials/footer %>
