@@ -1,4 +1,18 @@
-.text-line-through{
+.text-line-through {
     text-decoration: line-through;
     color: #bbb;
+}
+
+#data-heading{background: #dbdbdb}
+.data-row .row {
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.data-row .row-bg:nth-child(even) {
+    background: #efefef
+}
+
+.data-row .row-bg:nth-child(odd) {
+    background: #eaeaea
 }
