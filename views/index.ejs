@@ -34,17 +34,17 @@
         </div>
         <div class='col-md-4'>
           (<span class='time-alert'><%= todo.time  %>
-            <%= todo.am.toUpperCase() %></span>)
+            <%= todo.am %></span>)
         </div>
       </div>
       <!-- <%= todo._id %> -->
     </div>
     <div class='col-md-2 mb-2'>
-      <a href="/todos/<%= todo._id %>/new" class='btn btn-outline-primary'> Edit </a>
+      <a href="/todos/<%= todo._id %>/new" class='btn btn-outline-primary'> <i class="fas fa-edit"></i> </a>
     </div>
     <div class='col-md-2 mb-2'>
       <form action="/todos/<%= todo._id %>?_method=DELETE" method="POST">
-        <button class='btn btn-outline-danger'>Delete</button>
+        <button class='btn btn-outline-danger'><i class="fas fa-trash-alt"></i></button>
       </form>
     </div>
   </div>

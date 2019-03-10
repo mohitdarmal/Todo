@@ -50,25 +50,26 @@ app.post('/todos', (req, res) => {
    /*  console.log(req.body.title);
     console.log(req.body.time)
     console.log(req.body.am) */
+    console.log(req.body.am); 
     var newTodo = new Todo({
         title: req.body.title,
         time : req.body.time,
-        am : req.body.am
+        am : req.body.am.toUpperCase(),
     });
 
     
 
-        if(newTodo.am == "am" || newTodo.am == "pm"){
+        // if(newTodo.am == "am" || newTodo.am == "pm"){
         newTodo.save().then((result) => {
             if (!result) {
                 return console.log('Err');
             }
             res.redirect('/todos');
         });
-    }
+    /* }
     else {
         res.redirect('/todos');        
-    }
+    } */
    
   
 });
