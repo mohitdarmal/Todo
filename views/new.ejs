@@ -8,15 +8,15 @@
         value='<%= todo.title %>' name="title" autofocus>
     </div>
 
-    <div class='row'>
+    <div class='row mt-3'>
       <div class='col-md-6'>
         <input type="time" class="form-control" id="appt" name="time" value='<%= todo.time %>'>
       </div>
       <div class='col-md-6'>
-        <input type="text" name='am' placeholder='AM/PM' value='<%= todo.am %>'>
+        <input type="text" class="form-control" name='am' placeholder='AM/PM' value='<%= todo.am %>'>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group mt-3">
       <button type="submit" class="btn btn-primary"> Save Todo </button>
     </div>
   </form>

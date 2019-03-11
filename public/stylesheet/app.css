@@ -13,6 +13,14 @@
     background: #efefef
 }
 
+.data-row .row-bg:nth-child(even):hover {
+    background: #e0e0e0
+}
+
 .data-row .row-bg:nth-child(odd) {
     background: #eaeaea
+}
+
+.data-row .row-bg:nth-child(odd):hover {
+    background: #e0e0e0
 }

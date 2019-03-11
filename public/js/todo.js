@@ -1,15 +1,5 @@
-/* var title = document.querySelectorAll('.todo-title');
-console.log(title);
-for(var i = 0; i < title.length; i++){
-    title[i].addEventListener('click', () => {
-        this.style.textDecoration = 'underline'
-    });
-} */
-
 var title = document.querySelectorAll('.todo-title');
 console.log(title)
-/* 
- */
 
 title.forEach((todo) => {
     todo.addEventListener('click', () => {
@@ -19,28 +9,26 @@ title.forEach((todo) => {
 
 var timeAlert = document.querySelectorAll('.time-alert');
 var dataHeading = document.querySelector('#data-heading');
-var container = document.querySelector('.container');
+
 
 var row = document.querySelectorAll('.row-bg');
-for(var i = 0; i < row.length; i++){
-    console.log(row[i]);
-    if((row[i])){
-        // dataHeading.style.display = 'block'
-        console.log(true)
-        
-    }
-    else{
-       /*  dataHeading.style.display = 'none'
-        console.log(false) */
-        
-    }
+var dataRow = document.querySelector('.data-row');
+var i = 0;
+if(i < row.length){
+    dataHeading.style.opacity = '1'
+}else{
+    dataHeading.style.opacity = '0'
+    console.log(false)
 }
-/* var date = new Date();
-var hr = date.getHours();
-var min = date.getMinutes();
-var minute = min.toString();
-if(minute.length == 2){
-    minute = '0'+minute
-}
-var crtime = hr + ':' + min  */
 
+/* 
+var searchBtn = document.querySelector('#search-btn');
+var  todoTitleTxt = document.querySelectorAll('#todo-title-txt');
+
+searchBtn.addEventListener('keyup', () => {
+    console.log(searchBtn.value);
+    if(searchBtn.value == todoTitleTxt){
+        console.log(true)
+    }
+});
+  */
