@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const port = process.env.PORT || 3000;
 
 //App Config
 app.set('view engine', 'ejs');
@@ -16,7 +17,7 @@ app.use(bodyParser.json())
 
 //Mongoose Config
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/User-Todo', {
+mongoose.connect('mongodb+srv://Todo:Mohit@321@todo-hn0xl.mongodb.net/test?retryWrites=true || mongodb://localhost:27017/User-Todo', {
     useNewUrlParser: true
 });
 var userTodoSchema = new mongoose.Schema({
@@ -110,6 +111,6 @@ app.delete('/todos/:id', (req, res) => {
 });
 
 
-app.listen(3000, () => {
-    console.log('App Has Started on port 3000');
+app.listen(port, () => {
+    console.log(`App Has Started on port ${port}`);
 });
